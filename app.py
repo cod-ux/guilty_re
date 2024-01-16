@@ -1,6 +1,6 @@
 import firebase_admin
 from firebase_admin import credentials
-from nordigen.nordigen import NordigenClient
+from nordigen import NordigenClient
 from uuid import uuid4
 import json
 from flask import Flask, jsonify
