@@ -34,4 +34,4 @@ def get_banklist_route():
 
 #get_banklist()
 
-#app.run(debug=True)
+app.run(debug=True)
