@@ -5,7 +5,10 @@ from uuid import uuid4
 import json
 from flask import Flask, jsonify
 
-cred = credentials.Certificate("/Users/suryaganesan/vscode/finance/guilty_re/serviceAccountKey.json")
+path_linux = "/home/guilty_re/serviceAccountKey.json"
+path_mac = "/Users/suryaganesan/vscode/finance/guilty_re/serviceAccountKey.json"
+
+cred = credentials.Certificate(path_linux)
 firebase_admin.initialize_app(cred)
 
 client = NordigenClient(
