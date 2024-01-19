@@ -24,15 +24,25 @@ def get_banklist():
 
     institutions_dict = client.institution.get_institutions("GB")
     
-    institutions = [d.get("name") for d in institutions_dict]
+    try:
+        institutions = [d.get("name") for d in institutions_dict]
 
-    return jsonify(institutions)
+    except Exception as e:
+        error = e
+        pass
+
+    if not error:
+       return jsonify(institutions), 200
+
+    else:
+        return error, 400
+    
 
 @app.route('/onboarding/get_banklist')
 def get_banklist_route():
    inst = get_banklist()
 
-   return inst, 200
+   return inst
 
 def get_requisition():
     pass
