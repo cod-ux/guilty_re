@@ -28,14 +28,14 @@ def get_banklist():
         institutions = [d.get("name") for d in institutions_dict]
 
     except Exception as e:
-        error = e
+        error = {"error": e}
         pass
 
     if not error:
        return jsonify(institutions), 200
 
     else:
-        return error, 400
+        return jsonify(error), 400
     
 
 @app.route('/onboarding/get_banklist')
