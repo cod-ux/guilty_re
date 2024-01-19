@@ -34,8 +34,10 @@ def get_banklist_route():
 
    return inst, 200
 
+def get_requisition():
+    pass
 
 #get_banklist()
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000, debug=True)
+    app.run(host='0.0.0.0', port=5000)
