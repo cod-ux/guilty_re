@@ -23,7 +23,8 @@ def get_banklist():
     access_token = token_data["access"]
 
     institutions_dict = client.institution.get_institutions("GB")
-    
+    error = None   
+
     try:
         institutions = [d.get("name") for d in institutions_dict]
 
