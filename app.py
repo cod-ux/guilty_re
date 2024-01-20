@@ -41,14 +41,33 @@ def get_banklist():
 
 @app.route('/onboarding/get_banklist')
 def get_banklist_route():
-   inst = get_banklist()
+   response = get_banklist()
 
-   return inst
+   return response
 
-def get_requisition():
-    pass
+def init_link(inst):
+    institution_id = client.institution.get_institution_id_by_name(inst)
+    init = client.initialize_session(
+        institution_id=institution_id,
+        redirect_uri="www.google.com",
+        reference_id=str(uuid4())
+    )
+    
+    try:
+       link = init.link
+       req_id = init.requisition_id
 
-#get_banklist()
+       return jsonify({"link": link, "requisition_id": req_id}), 200
+
+    except Exception as e:
+       return jsonify({"error": e}), 400
+
+@app.route("/onboarding/init_link")
+def init_link_route(inst_selected):
+    response = init_link(inst_selected)
+
+    return response
+
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
