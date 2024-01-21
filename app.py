@@ -46,6 +46,8 @@ def get_banklist_route():
    return response
 
 def init_link(inst):
+    token_data = client.generate_token()
+
     institution_id = client.institution.get_institution_id_by_name(
         country="GB",
         institution=inst
