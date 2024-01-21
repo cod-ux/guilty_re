@@ -69,7 +69,7 @@ def init_link(inst):
 
 @app.route("/onboarding/initialize_link")
 def init_link_route():
-    inst_selected = request.get_json()
+    inst_selected = request.get_data()
     print(inst_selected)
 #    response = init_link(inst_selected)
 
