@@ -52,9 +52,10 @@ def init_link(inst):
         country="GB",
         institution=inst
     )
+
     init = client.initialize_session(
         institution_id=institution_id,
-        redirect_uri="https://www.google.com",
+        redirect_uri="https://suryagg925.bubbleapps.io/version-test/init_success_redirect?debug_mode=true",
         reference_id=str(uuid4())
     )
     
@@ -64,7 +65,7 @@ def init_link(inst):
        print("link: "+link)
        print("req id: "+req_id)
 
-       return jsonify({"link": link, "requisition_id": req_id}), 200
+       return jsonify({"link": link, "requisition_id": req_id, "institution_id": institution_id}), 200
 
     except Exception as e:
        return jsonify({"error": e}), 400
@@ -76,6 +77,25 @@ def init_link_route():
     response = init_link(inst_selected)
 
     return response
+
+def check_connection():
+    req_id = request.args.get("requisition_id")
+    institution_id = request.args.get("institution_id")
+
+    init = client.initialize_session(
+        institution_id=institution_id,
+        redirect_uri="https://suryagg925.bubbleapps.io/version-test/init_success_redirect?debug_mode=true",
+        reference_id=str(uuid4())
+    )
+
+    accounts = client.requisition.get_requisition_by_id(
+        requisition_id=init
+    )
+
+@app.route("/onboarding/check_connection")
+def check_connection_route():
+    
+    return None
 
 
 if __name__ == '__main__':
