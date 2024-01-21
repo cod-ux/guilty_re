@@ -3,7 +3,7 @@ from firebase_admin import credentials
 from nordigen import NordigenClient
 from uuid import uuid4
 import json
-from flask import Flask, jsonify
+from flask import Flask, jsonify, request
 
 path_linux = "/home/guilty_re/serviceAccountKey.json"
 path_mac = "/Users/suryaganesan/vscode/finance/guilty_re/serviceAccountKey.json"
@@ -63,7 +63,8 @@ def init_link(inst):
        return jsonify({"error": e}), 400
 
 @app.route("/onboarding/initialize_link")
-def init_link_route(inst_selected):
+def init_link_route():
+    inst_selected = request.args.get('institution')
     response = init_link(inst_selected)
 
     return response
