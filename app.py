@@ -62,7 +62,7 @@ def init_link(inst):
     except Exception as e:
        return jsonify({"error": e}), 400
 
-@app.route("/onboarding/init_link")
+@app.route("/onboarding/initialize_link")
 def init_link_route(inst_selected):
     response = init_link(inst_selected)
 
