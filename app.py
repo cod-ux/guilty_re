@@ -78,9 +78,7 @@ def init_link_route():
 
     return response
 
-def check_connection():
-    req_id = request.args.get("requisition_id")
-    institution_id = request.args.get("institution_id")
+def check_connection(requisition_id, institution_id):
 
     init = client.initialize_session(
         institution_id=institution_id,
@@ -89,13 +87,27 @@ def check_connection():
     )
 
     accounts = client.requisition.get_requisition_by_id(
-        requisition_id=init
+        requisition_id=requisition_id
     )
+    
+    try:
+       account_id = accounts["accounts"][0]
+    
+    except Exception as e:
+        return jsonify({"error": e}), 400
+
+    else:
+        return jsonify({"account_id": account_id}), 200
 
 @app.route("/onboarding/check_connection")
 def check_connection_route():
+
+    req_id = request.args.get("requisition_id")
+    inst_id = request.args.get("institution_id")
+
+    response = check_connection(req_id, inst_id)
     
-    return None
+    return response
 
 
 if __name__ == '__main__':
