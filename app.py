@@ -61,6 +61,8 @@ def init_link(inst):
     try:
        link = init.link
        req_id = init.requisition_id
+       print("link: "+link)
+       print("req id: "+req_id)
 
        return jsonify({"link": link, "requisition_id": req_id}), 200
 
