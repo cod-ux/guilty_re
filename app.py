@@ -46,7 +46,10 @@ def get_banklist_route():
    return response
 
 def init_link(inst):
-    institution_id = client.institution.get_institution_id_by_name(inst)
+    institution_id = client.institution.get_institution_id_by_name(
+        country="GB",
+        institution=inst
+    )
     init = client.initialize_session(
         institution_id=institution_id,
         redirect_uri="www.google.com",
