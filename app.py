@@ -54,7 +54,7 @@ def init_link(inst):
     )
     init = client.initialize_session(
         institution_id=institution_id,
-        redirect_uri="www.google.com",
+        redirect_uri="https://www.google.com",
         reference_id=str(uuid4())
     )
     
