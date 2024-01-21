@@ -69,10 +69,11 @@ def init_link(inst):
 
 @app.route("/onboarding/initialize_link")
 def init_link_route():
-    inst_selected = request.args.get('institution')
-    response = init_link(inst_selected)
+    inst_selected = request.get_json()
+    print(inst_selected)
+#    response = init_link(inst_selected)
 
-    return response
+    return None
 
 
 if __name__ == '__main__':
