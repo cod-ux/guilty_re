@@ -82,13 +82,9 @@ def init_link_route():
 
     return response
 
-def check_connection(requisition_id, institution_id):
+def check_connection(requisition_id, access_token):
 
-    init = client.initialize_session(
-        institution_id=institution_id,
-        redirect_uri="https://suryagg925.bubbleapps.io/version-test/init_success_redirect?debug_mode=true",
-        reference_id=str(uuid4())
-    )
+    client.token = access_token
 
     accounts = client.requisition.get_requisition_by_id(
         requisition_id=requisition_id
@@ -108,6 +104,7 @@ def check_connection_route():
 
     req_id = request.args.get("requisition_id")
     inst_id = request.args.get("institution_id")
+    access = request.args.get("access_token")
 
     response = check_connection(req_id, inst_id)
     
