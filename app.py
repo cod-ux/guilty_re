@@ -103,10 +103,9 @@ def check_connection(requisition_id, access_token):
 def check_connection_route():
 
     req_id = request.args.get("requisition_id")
-    inst_id = request.args.get("institution_id")
     access = request.args.get("access_token")
 
-    response = check_connection(req_id, inst_id)
+    response = check_connection(req_id, access)
     
     return response
 
