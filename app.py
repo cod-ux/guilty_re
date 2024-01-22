@@ -48,6 +48,10 @@ def get_banklist_route():
 def init_link(inst):
     token_data = client.generate_token()
 
+    access_token = token_data["access"]
+
+    refresh_token = token_data["refresh"]
+
     institution_id = client.institution.get_institution_id_by_name(
         country="GB",
         institution=inst
@@ -65,7 +69,7 @@ def init_link(inst):
        print("link: "+link)
        print("req id: "+req_id)
 
-       return jsonify({"link": link, "requisition_id": req_id, "institution_id": institution_id}), 200
+       return jsonify({"link": link, "requisition_id": req_id, "institution_id": institution_id, "access_token": access_token, "refresh_token": refresh_token}), 200
 
     except Exception as e:
        return jsonify({"error": e}), 400
